@@ -1,5 +1,9 @@
-venv/
 __pycache__/
 *.pyc
+.cache/
+.local/
+venv/
+.venv/
+*.db
 .env
-usuarios.dba
+.git-credentials

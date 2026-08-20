@@ -1,24 +1,84 @@
 {% extends "base.html" %}
 
-{# importa ferramentas do formulário Bootstrap #}
+
 {% import "bootstrap/wtf.html" as wtf %}
 
-{% block title %}Flasky{% endblock %}
+
+{% block title %}
+Avaliação contínua: Aula 050.B
+{% endblock %}
+
 
 {% block page_content %}
 
 <div class="page-header">
-    <h1>
-        Hello,
-        {% if name %}
-            {{ name }}
-        {% else %}
-            Stranger
-        {% endif %}!
-    </h1>
+
+    <!-- Se ainda não existe um nome -->
+    {% if not nome %}
+
+        <h1>Olá, Estranho!</h1>
+
+        <h2>
+            A sua Instituição de ensino é None
+        </h2>
+
+        <h2>
+            Está cursando a disciplina de
+        </h2>
+
+
+    <!-- Se o formulário já foi preenchido -->
+    {% else %}
+
+        <h1>
+            Olá, {{ nome }} {{ sobrenome }}!
+        </h1>
+
+        <h2>
+            A sua Instituição de ensino é {{ instituicao }}
+        </h2>
+
+        <h2>
+            Está cursando a disciplina de {{ disciplina }}
+        </h2>
+
+    {% endif %}
+
+
+    <br>
+
+
+    <!-- Mostra o IP -->
+    <p>
+        O IP do computador remoto é:
+        {{ request.remote_addr }}
+    </p>
+
+
+    <!-- Mostra o endereço da aplicação -->
+    <p>
+        O host da aplicação é:
+        {{ request.host }}
+    </p>
+
+
+    <hr>
+
+
+    <!-- Mostra o formulário -->
+    {{ wtf.quick_form(form) }}
+
+
 </div>
 
-{# Dá coordenadas ao Bootstrap para pegar o form do Python e construir o HTML #}
-{{ wtf.quick_form(form) }}
+{# Mostra a data e hora local #}
+<p>
+    The local date and time is {{ moment(current_time).format('LLL') }}.
+</p>
+
+{# Mostra quanto tempo passou desde a data e hora #}
+<p>
+    {{ moment(current_time).fromNow(refresh=True) }}.
+</p>
 
 {% endblock %}

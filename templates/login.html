@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+
+{% block title %}
+Login
+{% endblock %}
+
+
+{% block page_content %}
+
+<div class="login-container">
+
+    <h1>Login:</h1>
+
+    <form method="POST">
+
+        {{ form.hidden_tag() }}
+
+        <!-- Campo usuário/e-mail -->
+        {{ form.usuario(
+            class="form-control",
+            placeholder="Usuário ou e-mail"
+        ) }}
+
+        <br>
+
+        <!-- Campo senha -->
+        {{ form.senha(
+            class="form-control",
+            placeholder="Informe a sua senha"
+        ) }}
+
+        <br>
+
+        <!-- Botão enviar -->
+        {{ form.submit(class="btn btn-primary") }}
+
+    </form>
+
+</div>
+
+<p>
+    The local date and time is {{ moment(current_time).format('LLL') }}.
+</p>
+
+<p>
+    That was {{ moment(current_time).fromNow() }}.
+</p>
+{% endblock %}
