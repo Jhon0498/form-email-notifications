@@ -1,11 +1,9 @@
 {% extends "base.html" %}
-
-
 {% import "bootstrap/wtf.html" as wtf %}
 
 
 {% block title %}
-Avaliação contínua: Aula 050.B
+Flasky
 {% endblock %}
 
 
@@ -16,52 +14,9 @@ Avaliação contínua: Aula 050.B
     <!-- Se ainda não existe um nome -->
     {% if not nome %}
 
-        <h1>Olá, Estranho!</h1>
-
-        <h2>
-            A sua Instituição de ensino é None
-        </h2>
-
-        <h2>
-            Está cursando a disciplina de
-        </h2>
-
-
-    <!-- Se o formulário já foi preenchido -->
-    {% else %}
-
-        <h1>
-            Olá, {{ nome }} {{ sobrenome }}!
-        </h1>
-
-        <h2>
-            A sua Instituição de ensino é {{ instituicao }}
-        </h2>
-
-        <h2>
-            Está cursando a disciplina de {{ disciplina }}
-        </h2>
+        <h1>Hello, Stranger</h1>
 
     {% endif %}
-
-
-    <br>
-
-
-    <!-- Mostra o IP -->
-    <p>
-        O IP do computador remoto é:
-        {{ request.remote_addr }}
-    </p>
-
-
-    <!-- Mostra o endereço da aplicação -->
-    <p>
-        O host da aplicação é:
-        {{ request.host }}
-    </p>
-
-
     <hr>
 
 

@@ -9,27 +9,8 @@ class FormularioAluno(FlaskForm):
 
     #StringField é uma "caixa"para digitar o texto (nome)
     nome = StringField(
-        'Informe o seu nome:',
+        'What is your name:',
         validators=[DataRequired()] #informa que o campo não pode ficar vazio
-    )
-
-    sobrenome = StringField(
-        'Informe o seu sobrenome:',
-        validators=[DataRequired()]
-    )
-
-    instituicao = StringField(
-        'Informe a intituição de ensino:',
-        validators=[DataRequired()]
-    )
-
-    disciplina = SelectField(
-        'Informe a disciplina:', #Lista
-        choices=[
-            ('DSWA5', 'DSWA5'),
-            ('DSWA6', 'DSWA6'),
-            ('DSWA7', 'DSWA7')
-        ]
     )
 
     #botão que envia o formulário
