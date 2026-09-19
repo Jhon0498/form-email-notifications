@@ -1,39 +1,45 @@
 {% extends "base.html" %}
-{% import "bootstrap/wtf.html" as wtf %}
 
-
-{% block title %}
-Flasky
-{% endblock %}
-
+{% block title %}Formulário{% endblock %}
 
 {% block page_content %}
 
-<div class="page-header">
+<div class="container">
 
-    <!-- Se ainda não existe um nome -->
-    {% if not nome %}
+    <h1>Hello, Stranger!</h1>
 
-        <h1>Hello, Stranger</h1>
+    <p>Pleased to meet you!</p>
 
-    {% endif %}
-    <hr>
+    <!-- Formulário -->
+    <form method="POST">
 
+        <!-- Proteção CSRF -->
+        {{ form.hidden_tag() }}
 
-    <!-- Mostra o formulário -->
-    {{ wtf.quick_form(form) }}
+        <!-- Usuário -->
+        <div class="form-group">
 
+            {{ form.usuario.label }}
+
+            {{ form.usuario(class="form-control") }}
+
+            {% for error in form.usuario.errors %}
+
+                <span class="text-danger">
+                    {{ error }}
+                </span>
+
+            {% endfor %}
+
+        </div>
+
+        <br>
+
+        <!-- Botão -->
+        {{ form.submit(class="btn btn-primary") }}
+
+    </form>
 
 </div>
-
-{# Mostra a data e hora local #}
-<p>
-    The local date and time is {{ moment(current_time).format('LLL') }}.
-</p>
-
-{# Mostra quanto tempo passou desde a data e hora #}
-<p>
-    {{ moment(current_time).fromNow(refresh=True) }}.
-</p>
 
 {% endblock %}
