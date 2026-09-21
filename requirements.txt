@@ -1,5 +1,6 @@
 Flask
 Flask-Bootstrap
-Flask-Mail
 Flask-WTF
+Flask-Moment
 email-validator
+requests

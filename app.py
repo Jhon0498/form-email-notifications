@@ -1,8 +1,14 @@
 import os
+
 from flask import Flask
 from flask_bootstrap import Bootstrap
 from flask_moment import Moment
-from flask_mail import Mail
+from dotenv import load_dotenv
+
+
+# Carrega as variáveis do arquivo .env
+load_dotenv()
+
 
 app = Flask(__name__)
 
@@ -10,16 +16,16 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = 'minha-chave-secreta'
 
 
-# Configuração do e-mail - Mailgun
-app.config['MAIL_SERVER'] = 'smtp.mailgun.org'
-app.config['MAIL_PORT'] = 587
-app.config['MAIL_USE_TLS'] = True
-app.config['MAIL_USERNAME'] = os.environ.get('MAIL_USERNAME')
-app.config['MAIL_PASSWORD'] = os.environ.get('MAIL_PASSWORD')
+# Configurações do Mailgun
+app.config['MAILGUN_API_KEY'] = os.environ.get('MAILGUN_API_KEY')
+app.config['MAILGUN_DOMAIN'] = os.environ.get('MAILGUN_DOMAIN')
+app.config['MAILGUN_BASE_URL'] = os.environ.get(
+    'MAILGUN_BASE_URL',
+    'https://api.mailgun.net'
+)
 
-
-# Inicializa Flask-Mail DEPOIS da configuração
-mail = Mail(app)
+# E-mail que receberá as mensagens
+app.config['FLASKY_ADMIN'] = os.environ.get('FLASKY_ADMIN')
 
 
 # Inicializa Bootstrap
@@ -30,15 +36,9 @@ bootstrap = Bootstrap(app)
 moment = Moment(app)
 
 
-# Resgata os e-mails dos destinatários
-# que estão cadastrados nas variáveis de ambiente
-app.config['FLASKY_ADMIN'] = os.environ.get('FLASKY_ADMIN')
-
-
 # Registra as rotas
 from routes import registrar_rotas
-
-registrar_rotas(app, mail)
+registrar_rotas(app)
 
 
 if __name__ == '__main__':

@@ -40,6 +40,36 @@
 
     </form>
 
+    {% if nome %}
+
+        <br>
+
+        <div class="alert alert-success">
+
+            <strong>Cadastro realizado com sucesso!</strong>
+
+            <p>Nome: {{ nome }}</p>
+
+            {% if mensagem %}
+                <p>{{ mensagem }}</p>
+            {% endif %}
+
+        </div>
+
+    {% endif %}
+
+    {% if erro %}
+
+        <br>
+
+        <div class="alert alert-danger">
+
+            {{ erro }}
+
+        </div>
+
+    {% endif %}
+
 </div>
 
 {% endblock %}

@@ -1,17 +1,17 @@
 from flask_wtf import FlaskForm
 
-# importa os campos que será utilizado
-from wtforms import StringField, SubmitField, SelectField, PasswordField
+#importa os campos que será utilizado
+from wtforms import StringField, SubmitField, PasswordField
 
-# importa os validadores
+#importa os validadores
 from wtforms.validators import DataRequired
 
 
 class FormularioAluno(FlaskForm):
 
-    # Campo para informar o usuário cadastrado
+    # Usuário
     usuario = StringField(
-        'What is your name?',
+        'Usuário:',
         validators=[DataRequired()]
     )
 
@@ -32,7 +32,7 @@ class LoginForm(FlaskForm):
         'Informe a sua senha',
         validators=[DataRequired()],
         render_kw={
-            'placeholder': 'Informe a sua senha'
+            'placeholder': 'Informe a sua senha',
         }
     )
 
