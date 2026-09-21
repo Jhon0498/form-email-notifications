@@ -3,8 +3,6 @@ from datetime import datetime
 from forms import FormularioAluno
 import requests
 
-
-
 def registrar_rotas(app):
 
     # Usuários cadastrados temporariamente
@@ -41,7 +39,7 @@ def registrar_rotas(app):
                 nome = dados_usuario['nome']
 
                 # Pega o e-mail que receberá a mensagem
-                destinatario = app.config['FLASKY_ADMIN']
+                destinatario = app.config['FLASKY_ADMIN'].split(',')
 
                 # Pega a chave do Mailgun
                 mailgun_api_key = app.config['MAILGUN_API_KEY']
