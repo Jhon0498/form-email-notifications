@@ -1,50 +1,66 @@
-# Flask Forms
+# Form Email Notifications
 
-A web application developed with **Python and Flask** to work with web forms, data validation, and HTML pages using Jinja2 templates.
+A web application developed with **Python and Flask** that processes a web form, validates user input, and sends email notifications using the **Mailgun API**.
+
+This project was developed as part of my studies in web development with Flask, with a focus on form handling, validation, environment variables, API integration, and email notifications.
 
 ## About the Project
 
-This project was developed as part of my studies in web development with Flask.
+The application allows a user to enter their username through a web form.
 
-The application uses an organized structure with:
+When the submitted user is found in the application's temporary user registry, the system:
 
-* **Flask** for web application development
-* **Flask-WTF** for form creation and validation
-* **Jinja2** for HTML templates
-* **Bootstrap** for page styling
-* **Git and GitHub** for version control
+1. Validates the submitted form.
+2. Identifies the registered user.
+3. Retrieves the user's registration information.
+4. Builds an email notification.
+5. Sends the email through the Mailgun API.
+6. Displays a success or error message.
+
+The project also includes error handling for invalid users, Mailgun authentication errors, and connection failures.
 
 ## Features
 
-* Web form display
-* Form field validation
+* Web form creation and validation
 * User input processing
-* Feedback messages
-* Reusable HTML templates
+* Temporary user registration
+* Email notification through Mailgun API
+* Environment variable configuration
+* Success and error feedback
+* Flask templates using Jinja2
+* Bootstrap integration
+* Flask-Moment integration
 * Custom `404` and `500` error pages
-* Bootstrap-based interface
+* Git and GitHub version control
+* Deployment on PythonAnywhere
 
 ## Technologies
 
-* Python
-* Flask
-* Flask-WTF
-* Flask-Bootstrap
-* Jinja2
-* HTML5
-* CSS3
-* Git
-* GitHub
+* **Python**
+* **Flask**
+* **Flask-WTF**
+* **Flask-Bootstrap**
+* **Flask-Moment**
+* **Jinja2**
+* **Requests**
+* **Python-dotenv**
+* **Mailgun API**
+* **HTML5**
+* **CSS3**
+* **Git**
+* **GitHub**
+* **PythonAnywhere**
 
 ## Project Structure
 
 ```text
-flask-forms/
+form-email-notifications/
 │
 ├── app.py
 ├── forms.py
 ├── routes.py
 ├── requirements.txt
+├── .gitignore
 │
 ├── static/
 │   └── favicon.ico
@@ -57,18 +73,84 @@ flask-forms/
     └── 500.html
 ```
 
+## How It Works
+
+The application starts in `app.py`, where Flask is initialized and the application configuration is loaded.
+
+Environment variables are used for sensitive and configurable information such as the Mailgun API key, domain, and recipient email.
+
+The routes are registered through:
+
+```python
+from routes import registrar_rotas
+
+registrar_rotas(app)
+```
+
+The main route is responsible for processing the form submission.
+
+After validation, the application checks whether the submitted username exists in the temporary user registry.
+
+If the user exists, the application creates the email data and sends the request to Mailgun using the `requests` library.
+
+## Mailgun Integration
+
+The application uses the Mailgun API to send email notifications.
+
+The request is authenticated using the Mailgun API key:
+
+```python
+auth=('api', mailgun_api_key)
+```
+
+The message is sent through the Mailgun endpoint:
+
+```text
+https://api.mailgun.net/v3/<MAILGUN_DOMAIN>/messages
+```
+
+The application checks the HTTP response returned by Mailgun.
+
+A status code of `200` indicates that the request was successfully accepted.
+
+## Environment Variables
+
+The project uses a `.env` file for local configuration.
+
+Example:
+
+```env
+FLASKY_ADMIN=your-email@example.com
+FLASK_APP=app.py
+MAILGUN_API_KEY=your-mailgun-api-key
+MAILGUN_DOMAIN=your-mailgun-domain
+MAILGUN_BASE_URL=https://api.mailgun.net
+```
+
+### Security
+
+The `.env` file contains sensitive information and **must not be committed to GitHub**.
+
+Make sure `.gitignore` contains:
+
+```text
+.env
+```
+
+Never publish your Mailgun API key in the repository.
+
 ## Installation
 
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/Jhon0498/flask-forms.git
+git clone https://github.com/Jhon0498/form-email-notifications.git
 ```
 
-### 2. Navigate to the project directory
+### 2. Enter the project directory
 
 ```bash
-cd flask-forms
+cd form-email-notifications
 ```
 
 ### 3. Create a virtual environment
@@ -77,44 +159,4 @@ cd flask-forms
 python -m venv venv
 ```
 
-### 4. Activate the virtual environment
-
-On Windows:
-
-```bash
-venv\Scripts\activate
-```
-
-On Linux/macOS:
-
-```bash
-source venv/bin/activate
-```
-
-### 5. Install the dependencies
-
-```bash
-pip install -r requirements.txt
-```
-
-### 6. Run the application
-
-```bash
-python app.py
-```
-
-Then open the following address in your browser:
-
-```text
-http://127.0.0.1:5000
-```
-
-## Purpose
-
-The purpose of this project is to practice the main concepts of web application development using Flask, especially the creation, validation, and processing of web forms.
-
-## Author
-
-**Jhonatan Mendes Morão**
-
-This project was developed for academic and learning purposes.
+### 4. Activate the vi
